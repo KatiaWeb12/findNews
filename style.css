@@ -1,6 +1,10 @@
+*{
+    transition: 0.5s;
+}
 body{
     width: 100%;
     overflow-x: hidden;
+    position: relative;
 }
 body, p, h1, h2, h3{
     font-family: 'Montserrat', sans-serif;
@@ -74,4 +78,25 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label{
 .customToast{
     background: rgb(143, 3, 185);
     color: white;
+}
+.favourite{
+    top: 80px;
+    right: 50px;
+    position: fixed;
+    background: rgb(212, 112, 243);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 20px 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: white;
+    z-index: 10;
+}
+.favourite:hover{
+    background: rgb(216, 28, 200);
+    color: rgb(254, 242, 255);
+}
+.favourite:active{
+    background: rgb(212, 112, 243) !important;
 }
