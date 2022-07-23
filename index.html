@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <title>Newspaper</title>
+  </head>
+  <body>
+    <header>
+      <h1>NEWSPAPER</h1>
+      <p>created by Kate Kraeva</p>
+    </header>
+    <div class="row formCont">
+      <div class="col s12 m12 l8">
+        <div class="card card-form">
+          <div class="card-content">
+            <span class="card-title">Find news</span>
+            <div class="row">
+              <form action="">
+                <div class="input-field col s12">
+                  <select name="country">
+                    <option value="ru" selected>Russia</option>
+                    <option value="us">USA</option>
+                    <option value="fr">France</option>
+                  </select>
+                  <label>Choose country</label>
+                </div>
+                <div class="input-field col s12">
+                  <select name="category">
+                    <option value="business" selected>business</option>
+                    <option value="entertainment">entertainment</option>
+                    <option value="general">general</option>
+                    <option value="health">health</option>
+                    <option value="science">science</option>
+                    <option value="sports">sports</option>
+                    <option value="technology">technology</option>
+                  </select>
+                  <label>Choose category</label>
+                </div>
+                <div class="input-field col s12">
+                  <input
+                    id="search"
+                    type="text"
+                    class="validate"
+                    name="search"
+                  />
+                  <label for="search">Input search request</label>
+                </div>
+                <button type="submit" class="waves-effect waves-light submit">
+                  <i class="material-icons right">send</i>Search
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row grid"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="app.js" type="module"></script>
+    <script src="api.js" type="module"></script>
+  </body>
+</html>

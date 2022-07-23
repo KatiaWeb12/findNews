@@ -1,0 +1,77 @@
+body{
+    width: 100%;
+    overflow-x: hidden;
+}
+body, p, h1, h2, h3{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+}
+header{
+    width: 100vw;
+    height: 50px;
+    background: rgb(212, 112, 243);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+header h1{
+    font-size: 25px;
+    color: white;
+}
+header p{
+    font-size: 15px;
+    color: white;
+}
+.card-form{
+    margin-left: 50px;
+    margin-top: 50px;
+}
+.dropdown-content li>a, .dropdown-content li>span{
+    color: rgb(143, 3, 185);
+}
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid rgb(143, 3, 185);
+}
+input[type=text]:not(.browser-default):focus:not([readonly]){
+    color: black;
+    border-bottom: 1px solid rgb(143, 3, 185);
+    -webkit-box-shadow: 0 1px 0 0 rgb(143, 3, 185);
+    box-shadow: 0 1px 0 0 rgb(143, 3, 185);
+}
+input.valid[type=text]:not(.browser-default), input.valid[type=text]:not(.browser-default):focus{
+    border-bottom: 1px solid rgb(143, 3, 185);
+    -webkit-box-shadow: 0 1px 0 0 rgb(143, 3, 185);
+    box-shadow: 0 1px 0 0 rgb(143, 3, 185);
+}
+input[type=text]:not(.browser-default):focus:not([readonly])+label{
+    color: rgb(143, 3, 185);
+}
+.submit{
+    padding: 15px 15px !important;
+    background: rgb(212, 112, 243) !important;
+    color: white;
+    border-radius: 7px;
+    margin-top: 15px;
+    margin-left: 10px;
+    outline: none;
+    border: none;
+}
+.grid{
+    width: 98%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.card-title{
+    display: block;
+    padding-left: 24px;
+    padding-top: 24px;
+}
+.preloader-wrapper{
+    display: block;
+    margin: 0 auto;
+}
+.customToast{
+    background: rgb(143, 3, 185);
+    color: white;
+}
