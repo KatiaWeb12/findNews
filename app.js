@@ -88,7 +88,7 @@ function newsTemplate({ title, description, url, urlToImage }, num) {
         <p>${description || "More info in the source"}</p>
       </div>
       <div class="card-action">
-          <a href="${url}" target="_blank">Learn more</a>
+          <a href="${url}" class="newUrl" target="_blank">Learn more</a>
           <img src="plus.png" class="tooltipped" data-number="${num}" data-position="left" data-tooltip="Add to favourite"alt="">
           <img src="tick.png" class="tick" alt="">
         </div>       
@@ -127,4 +127,9 @@ document.addEventListener("click", (event) => {
   event.target.remove();
   document.querySelectorAll(".material-tooltip")[number].style.display = "none";
   card.querySelector(".tick").style.display = "block";
+  let favourite = {
+    title: card.querySelector(".card-title").textContent,
+    link: card.querySelector(".newUrl").href,
+  };
+  console.log(favourite);
 });

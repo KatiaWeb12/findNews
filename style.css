@@ -125,3 +125,31 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label{
 .material-tooltip{
     background: #E74C3C;
 }
+.favourNew{
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.363);
+    flex-direction: column;
+}
+.favourNew h4{
+    font-size: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 20px;
+}
+.favourLink{
+    display: flex;
+    align-items: center;
+}
+.favouriteUrl{
+    font-size: 18px;
+    color: rgb(151, 36, 185);
+    margin-right: 20px;
+}
+.favourLink i{
+    cursor: pointer;
+}
+.favourLink i:hover{
+    color: #E74C3C;
+}
