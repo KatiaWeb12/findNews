@@ -71,6 +71,11 @@ function renderNews(news) {
     fragment += newsTemplate(el);
   });
   newsCont.insertAdjacentHTML("afterbegin", fragment);
+  let toolTips = document.querySelectorAll(".tooltipped");
+  let toolTipsInit = M.Tooltip.init(toolTips, {
+    inDuration: 100,
+    outDuration: 100,
+  });
 }
 function newsTemplate({ title, description, url, urlToImage }) {
   return `<div class="col s12">
@@ -83,8 +88,10 @@ function newsTemplate({ title, description, url, urlToImage }) {
         <p>${description || "More info in the source"}</p>
       </div>
       <div class="card-action">
-          <a href="${url}">This is a link</a>
-        </div>
+          <a href="${url}" target="_blank">Learn more</a>
+          <img src="plus.png" class="tooltipped" data-position="left" data-tooltip="Add to favourite"alt="">
+          <img src="tick.png" class="tick" alt="">
+        </div>       
     </div>
   </div>`;
 }

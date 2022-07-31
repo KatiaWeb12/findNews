@@ -82,16 +82,17 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label{
 .favourite{
     top: 80px;
     right: 50px;
-    position: fixed;
+    position: absolute;
     background: rgb(212, 112, 243);
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 20px 40px;
+    padding: 15px 30px;
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     color: white;
     z-index: 10;
+    border-radius: 5px;
 }
 .favourite:hover{
     background: rgb(216, 28, 200);
@@ -102,4 +103,25 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label{
 }
 .modal{
     z-index: 10;
+}
+.card-action a{
+    color: rgb(155, 2, 155) !important;
+}
+.card-action{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tooltipped{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.tick{
+    display: none;
+    width: 26px;
+    height: 26px;
+}
+.material-tooltip{
+    background: #E74C3C;
 }
