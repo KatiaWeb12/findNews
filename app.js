@@ -67,8 +67,8 @@ function onGetResponse(err, res) {
 }
 function renderNews(news) {
   let fragment = "";
-  news.forEach((el) => {
-    fragment += newsTemplate(el);
+  news.forEach((el, num) => {
+    fragment += newsTemplate(el, num);
   });
   newsCont.insertAdjacentHTML("afterbegin", fragment);
   let toolTips = document.querySelectorAll(".tooltipped");
@@ -77,7 +77,7 @@ function renderNews(news) {
     outDuration: 100,
   });
 }
-function newsTemplate({ title, description, url, urlToImage }) {
+function newsTemplate({ title, description, url, urlToImage }, num) {
   return `<div class="col s12">
     <div class="card">
       <div class="card-image">
@@ -89,7 +89,7 @@ function newsTemplate({ title, description, url, urlToImage }) {
       </div>
       <div class="card-action">
           <a href="${url}" target="_blank">Learn more</a>
-          <img src="plus.png" class="tooltipped" data-position="left" data-tooltip="Add to favourite"alt="">
+          <img src="plus.png" class="tooltipped" data-number="${num}" data-position="left" data-tooltip="Add to favourite"alt="">
           <img src="tick.png" class="tick" alt="">
         </div>       
     </div>
@@ -118,10 +118,13 @@ function deletePreloader() {
 function showAlert(err) {
   M.toast({ html: err, classes: "customToast" });
 }
-// let modal = document.querySelector(".modal");
-// favourite.addEventListener("click", () => {
-//   modal.style.display = "block";
-// });
-// document.querySelector(".modal-close").addEventListener("click", () => {
-//   modal.style.display = "none";
-// });
+document.addEventListener("click", (event) => {
+  if (!event.target.classList.contains("tooltipped")) {
+    return;
+  }
+  let number = +event.target.dataset.number;
+  let card = event.target.parentElement.parentElement;
+  event.target.remove();
+  document.querySelectorAll(".material-tooltip")[number].style.display = "none";
+  card.querySelector(".tick").style.display = "block";
+});
