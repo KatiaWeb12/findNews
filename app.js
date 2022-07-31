@@ -4,10 +4,13 @@ let input = form.elements["search"];
 let countrySelect = form.elements["country"];
 let categorySelect = form.elements["category"];
 let newsCont = document.querySelector(".grid");
+let favourite = document.querySelector(".favourite");
 import { myHTTP } from "./api.js";
 document.addEventListener("DOMContentLoaded", function () {
   let selects = document.querySelectorAll("select");
   let selectInit = M.FormSelect.init(selects);
+  let modal = document.querySelector(".modal");
+  let modalInit = M.Modal.init(modal);
 });
 let http = myHTTP();
 let service = () => {
@@ -108,3 +111,10 @@ function deletePreloader() {
 function showAlert(err) {
   M.toast({ html: err, classes: "customToast" });
 }
+// let modal = document.querySelector(".modal");
+// favourite.addEventListener("click", () => {
+//   modal.style.display = "block";
+// });
+// document.querySelector(".modal-close").addEventListener("click", () => {
+//   modal.style.display = "none";
+// });

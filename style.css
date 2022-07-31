@@ -100,3 +100,6 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label{
 .favourite:active{
     background: rgb(212, 112, 243) !important;
 }
+.modal{
+    z-index: 10;
+}
