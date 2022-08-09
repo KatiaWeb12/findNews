@@ -5,12 +5,14 @@ let countrySelect = form.elements["country"];
 let categorySelect = form.elements["category"];
 let newsCont = document.querySelector(".grid");
 let favourite = document.querySelector(".favourite");
+let favourNewsCont = document.querySelector(".modal-content");
 import { myHTTP } from "./api.js";
 document.addEventListener("DOMContentLoaded", function () {
   let selects = document.querySelectorAll("select");
   let selectInit = M.FormSelect.init(selects);
   let modal = document.querySelector(".modal");
   let modalInit = M.Modal.init(modal);
+  checkFavouriteNews();
 });
 let http = myHTTP();
 let service = () => {
@@ -41,6 +43,7 @@ form.addEventListener("submit", (event) => {
 });
 function loadNews() {
   newsCont.innerHTML = "";
+  cleanTolltipArray();
   showPreloader();
   if (!input.value) {
     newService.topHeadlinesCategory(
@@ -131,5 +134,44 @@ document.addEventListener("click", (event) => {
     title: card.querySelector(".card-title").textContent,
     link: card.querySelector(".newUrl").href,
   };
-  console.log(favourite);
+  favourNewsCont.insertAdjacentHTML("afterbegin", newFavouriteNew(favourite));
+  checkFavouriteNews();
+});
+
+function newFavouriteNew({ title, link }) {
+  return `<div class="favourNew">
+  <h4>
+    ${title}
+  </h4>
+  <div class="favourLink">
+    <a href="${link}" class="favouriteUrl">Learn more</a>
+    <i class="material-icons">delete</i>
+  </div>
+</div>`;
+}
+function cleanTolltipArray() {
+  document.querySelectorAll(".material-tooltip").forEach((el) => {
+    el.remove();
+  });
+}
+function checkFavouriteNews() {
+  if (!favourNewsCont.children.length) {
+    favourNewsCont.insertAdjacentHTML(
+      "afterbegin",
+      `<p class="empty">There're no favourite news</p>`
+    );
+    return;
+  }
+  if (document.querySelector(".empty")) {
+    document.querySelector(".empty").remove();
+  }
+}
+favourNewsCont.addEventListener("click", (event) => {
+  if (event.target.classList.contains("material-icons")) {
+    if (confirm("Do you really want to delete that news?")) {
+      let favourNews = event.target.closest(".favourNew"); //возвращает ближайший родительский HTML элемент по селектору
+      favourNews.remove();
+      checkFavouriteNews();
+    }
+  }
 });

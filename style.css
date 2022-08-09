@@ -153,3 +153,8 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label{
 .favourLink i:hover{
     color: #E74C3C;
 }
+.empty{
+    text-align: center;
+    font-size: 20px;
+    color: rgb(114, 23, 141);
+}
