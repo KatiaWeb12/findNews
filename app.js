@@ -136,6 +136,10 @@ document.addEventListener("click", (event) => {
     title: card.querySelector(".card-title").textContent,
     link: card.querySelector(".newUrl").href,
   };
+  if (checkAddedFavouriteNews(favourite.title)) {
+    showAlert("This news has already added");
+    return;
+  }
   favourNewsCont.insertAdjacentHTML("afterbegin", newFavouriteNew(favourite));
   checkFavouriteNews();
   favouriteIndicator(1);
@@ -143,7 +147,7 @@ document.addEventListener("click", (event) => {
 
 function newFavouriteNew({ title, link }) {
   return `<div class="favourNew">
-  <h4>
+  <h4 class="newsTitle">
     ${title}
   </h4>
   <div class="favourLink">
@@ -187,4 +191,21 @@ function favouriteIndicator(number) {
   } else {
     indicator.style.display = "none";
   }
+}
+function checkAddedFavouriteNews(header) {
+  let newsTitle = document.querySelectorAll(".newsTitle");
+  let headers = [];
+  newsTitle.forEach((el) => {
+    headers.push(el.textContent);
+  });
+  console.log(
+    headers.some((el) => {
+      //ищет хотя бы одно совпадение
+      return el.includes(header); //проверяет наличие подстроки внутри строки
+    })
+  );
+  return headers.some((el) => {
+    //ищет хотя бы одно совпадение
+    return el.includes(header); //проверяет наличие подстроки внутри строки
+  });
 }
