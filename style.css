@@ -158,3 +158,18 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label{
     font-size: 20px;
     color: rgb(114, 23, 141);
 }
+.indicator{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #c50464;
+    position: absolute;
+    top: 72px;
+    right: 41.5px;
+    z-index: 11;
+    color: rgb(255, 255, 255);
+    font-size: 12.5px;
+}

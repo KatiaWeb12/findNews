@@ -6,6 +6,8 @@ let categorySelect = form.elements["category"];
 let newsCont = document.querySelector(".grid");
 let favourite = document.querySelector(".favourite");
 let favourNewsCont = document.querySelector(".modal-content");
+let indicator = document.querySelector(".indicator");
+let numberOfFavour = 0;
 import { myHTTP } from "./api.js";
 document.addEventListener("DOMContentLoaded", function () {
   let selects = document.querySelectorAll("select");
@@ -136,6 +138,7 @@ document.addEventListener("click", (event) => {
   };
   favourNewsCont.insertAdjacentHTML("afterbegin", newFavouriteNew(favourite));
   checkFavouriteNews();
+  favouriteIndicator(1);
 });
 
 function newFavouriteNew({ title, link }) {
@@ -172,6 +175,16 @@ favourNewsCont.addEventListener("click", (event) => {
       let favourNews = event.target.closest(".favourNew"); //возвращает ближайший родительский HTML элемент по селектору
       favourNews.remove();
       checkFavouriteNews();
+      favouriteIndicator(-1);
     }
   }
 });
+function favouriteIndicator(number) {
+  numberOfFavour += number;
+  if (numberOfFavour > 0) {
+    indicator.style.display = "flex";
+    indicator.textContent = numberOfFavour;
+  } else {
+    indicator.style.display = "none";
+  }
+}
