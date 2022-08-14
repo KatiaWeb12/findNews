@@ -38,11 +38,13 @@ let service = () => {
     },
   };
 };
+//вызывает метод get, используя параметры(URL, cb)
 let newService = service();
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   loadNews();
 });
+// вызывается функция loadNews() при submit формы
 function loadNews() {
   newsCont.innerHTML = "";
   cleanTolltipArray();
@@ -58,6 +60,7 @@ function loadNews() {
     newService.everything(input.value, onGetResponse);
   }
 }
+//очищает newsCont, вызывает функции cleanTolltipArray(), showPreloader(), отправляет запрос по ссылке из метотов newService
 function onGetResponse(err, res) {
   deletePreloader();
   if (err) {
@@ -70,6 +73,7 @@ function onGetResponse(err, res) {
   }
   renderNews(res.articles);
 }
+//вызывает функцию deletePreloader(), при возникновении ошибки или отсутствия новостей по запросу вызывается функция showAlert с текстом ошибки. В обратном случае вызывается функция renderNews
 function renderNews(news) {
   let fragment = "";
   news.forEach((el, num) => {
@@ -82,6 +86,7 @@ function renderNews(news) {
     outDuration: 100,
   });
 }
+//рендерятся новости из HTML фрагментов, возвращаемых функцией newsTemplate
 function newsTemplate({ title, description, url, urlToImage }, num) {
   return `<div class="col s12">
     <div class="card">
@@ -100,6 +105,8 @@ function newsTemplate({ title, description, url, urlToImage }, num) {
     </div>
   </div>`;
 }
+//возвращает HTML фрагмент с новостью
+
 //прелоадер-промежуточный компонент на время загрузки
 function showPreloader() {
   document.querySelector(".formCont").insertAdjacentHTML(
@@ -117,12 +124,15 @@ function showPreloader() {
   </div>`
   );
 }
+//рендерит preloader
 function deletePreloader() {
   document.querySelector(".preloader-wrapper").remove();
 }
+//удаляет preloader
 function showAlert(err) {
   M.toast({ html: err, classes: "customToast" });
 }
+//инициализирует alert
 document.addEventListener("click", (event) => {
   if (!event.target.classList.contains("tooltipped")) {
     return;
@@ -144,23 +154,25 @@ document.addEventListener("click", (event) => {
   checkFavouriteNews();
   favouriteIndicator(1);
 });
-
+// при клике на плюс удаляет плюс, tooltip, поятвляется галочка. Если новость ещё не добавлена, рендериться избранная новость из HTML фрагмента, возвращаемого функцией newFavouriteNew и вызываются функции checkFavouriteNews и favouriteIndicator
 function newFavouriteNew({ title, link }) {
   return `<div class="favourNew">
   <h4 class="newsTitle">
     ${title}
   </h4>
   <div class="favourLink">
-    <a href="${link}" class="favouriteUrl">Learn more</a>
+    <a href="${link}" class="favouriteUrl" target="_blank">Learn more</a>
     <i class="material-icons">delete</i>
   </div>
 </div>`;
 }
+//возвращает HTML фрагмент с избранной новостью
 function cleanTolltipArray() {
   document.querySelectorAll(".material-tooltip").forEach((el) => {
     el.remove();
   });
 }
+//удаляет все tooltip
 function checkFavouriteNews() {
   if (!favourNewsCont.children.length) {
     favourNewsCont.insertAdjacentHTML(
@@ -173,6 +185,7 @@ function checkFavouriteNews() {
     document.querySelector(".empty").remove();
   }
 }
+//Если массив с избранными новостями пуст, рендерит тег p с надписью и выходит из функции. Если надпись уже существует, удаляет её
 favourNewsCont.addEventListener("click", (event) => {
   if (event.target.classList.contains("material-icons")) {
     if (confirm("Do you really want to delete that news?")) {
@@ -183,6 +196,7 @@ favourNewsCont.addEventListener("click", (event) => {
     }
   }
 });
+//при клике на урну, вызывается confirm. Если ответ пользователя положительный, избранная новость удаляется. Вызываются функции checkFavouriteNews(), favouriteIndicator
 function favouriteIndicator(number) {
   numberOfFavour += number;
   if (numberOfFavour > 0) {
@@ -192,20 +206,20 @@ function favouriteIndicator(number) {
     indicator.style.display = "none";
   }
 }
+//Если избранных новостей больше 0, появляется индикатор. Если избранных новостей нет, индикатор удаляется
 function checkAddedFavouriteNews(header) {
   let newsTitle = document.querySelectorAll(".newsTitle");
   let headers = [];
   newsTitle.forEach((el) => {
     headers.push(el.textContent);
   });
-  console.log(
-    headers.some((el) => {
-      //ищет хотя бы одно совпадение
-      return el.includes(header); //проверяет наличие подстроки внутри строки
-    })
-  );
+  // headers.some((el) => {
+  //   //ищет хотя бы одно совпадение
+  //   return el.includes(header); //проверяет наличие подстроки внутри строки
+  // })
   return headers.some((el) => {
     //ищет хотя бы одно совпадение
     return el.includes(header); //проверяет наличие подстроки внутри строки
   });
 }
+// проверяет на совпадение заголовок выбранной новости с заголовками ранее добавленных избранных новостей
