@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let selectInit = M.FormSelect.init(selects);
   let modal = document.querySelector(".modal");
   let modalInit = M.Modal.init(modal);
+  loadFavouriteNews();
   checkFavouriteNews();
 });
 let http = myHTTP();
@@ -151,6 +152,7 @@ document.addEventListener("click", (event) => {
     return;
   }
   favourNewsCont.insertAdjacentHTML("afterbegin", newFavouriteNew(favourite));
+  setStorage(favourite, true);
   checkFavouriteNews();
   favouriteIndicator(1);
 });
@@ -191,6 +193,11 @@ favourNewsCont.addEventListener("click", (event) => {
     if (confirm("Do you really want to delete that news?")) {
       let favourNews = event.target.closest(".favourNew"); //возвращает ближайший родительский HTML элемент по селектору
       favourNews.remove();
+      let favourite = {
+        title: favourNews.querySelector(".newsTitle").textContent,
+        link: favourNews.querySelector(".favouriteUrl").href,
+      };
+      setStorage(favourite, false);
       checkFavouriteNews();
       favouriteIndicator(-1);
     }
@@ -223,3 +230,33 @@ function checkAddedFavouriteNews(header) {
   });
 }
 // проверяет на совпадение заголовок выбранной новости с заголовками ранее добавленных избранных новостей
+function setStorage(obj, add) {
+  if (add) {
+    if (!localStorage.getItem("favourite")) {
+      localStorage.setItem("favourite", JSON.stringify([obj]));
+    } else {
+      let array = JSON.parse(localStorage.getItem("favourite"));
+      array.push(obj);
+      localStorage.setItem("favourite", JSON.stringify(array));
+    }
+  } else {
+    let array = JSON.parse(localStorage.getItem("favourite"));
+    if (array.length === 1) {
+      localStorage.removeItem("favourite");
+    } else {
+      let filteredArray = array.filter((el) => {
+        return el.title !== obj.title.trim(); //trim() удаляет пробелы слева и справа
+      });
+      localStorage.setItem("favourite", JSON.stringify(filteredArray));
+    }
+  }
+}
+function loadFavouriteNews() {
+  let array = JSON.parse(localStorage.getItem("favourite"));
+  if (array) {
+    array.forEach((el) => {
+      favourNewsCont.insertAdjacentHTML("afterbegin", newFavouriteNew(el));
+      favouriteIndicator(1);
+    });
+  }
+}
